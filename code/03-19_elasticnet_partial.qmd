@@ -199,8 +199,7 @@ weather_train <- training(weather_split)
 weather_train
 ```
 
-How many observations?
-*487 observations*
+How many observations? *487 observations*
 
 ```{r weather_test}
 # Setting test split
@@ -209,9 +208,7 @@ weather_test <- testing(weather_split)
 weather_test
 ```
 
-How many observations?
-*211 observations*
-
+How many observations? *211 observations*
 
 Let's check the distribution of our predicted variable **strength_gtex**
 across training and testing:
@@ -383,13 +380,13 @@ enet_grid_result$.metrics[[1]]
 
 ```
 
-Why 242 rows? 121 (each a combination of mixture and penalty) x 2 (2
-assessment metrics)
+Why 242 rows? *Ans:* 121 (each a combination of mixture and penalty) x 2
+(2 assessment metrics)
 
 Let's collect a summary of metrics (across all folds, for each mixture x
 penalty combination), and plot them.
 
-Firs, RMSE (lower is better):
+First, RMSE (lower is better):
 
 ```{r RMSE}
 enet_grid_result %>%
@@ -405,6 +402,8 @@ enet_grid_result %>%
 ```
 
 What penalty and mixture values created lowest RMSE?
+
+*Ans: Penalty of 1 and mixture of 0*
 
 Now, let's look into R2 (higher is better):
 
@@ -519,9 +518,11 @@ final_spec %>%
 
 ```
 
-How does metrics on test compare to metrics on train?
+How does metrics on test compare to metrics on train? 
+*RMSE is less in train (test = 2.96, train = 2.80). R2 is more in train set (test = 0.17, train - 0.19)*
 
-Why?
+Why? 
+*Because model had already seen train dataset, but test is unseen dataset which is very common observation.*
 
 Predicted vs. observed plot:
 
@@ -569,9 +570,7 @@ final_spec %>%
     
 ```
 
-**Therefore, tmin in September (positive effect), and tmax in September
-(negative effect) were the most important variables affecting cotton
-fiber strength.**
+**Therefore, tmin in September (positive effect), and tmax in September (negative effect) were the most important variables affecting cotton fiber strength**
 
 # Summary
 
@@ -580,7 +579,7 @@ In this exercise, we covered: - Penalized linear regression types
 - Set up a ML workflow to train an elastic net model\
 - Used `recipes` to process data - Used `rsamples` to split data\
 - Used a fixed grid to search the best values for mixture and penalty\
-- Used 5-fold cross validation as the resampling method\
+- Used 10-fold cross validation as the resampling method\
 - Used both R2 and RMSE as the metrics to select best model\
 - Once final model was determined, used it to predict **test set**\
 - Evaluated it with predicted vs. observed plot, R2 and RMSE metrics,
